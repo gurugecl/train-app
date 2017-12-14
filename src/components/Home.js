@@ -23,7 +23,7 @@ class Home extends Component {
       <div className="Home">
         <header className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
-          <h1 className="Home-title">The Jove Express</h1>
+            <h1 className="Home-title"><b>The Jove Express</b></h1>
         </header>
           <Grid>
               <Row className="row">

@@ -3,7 +3,7 @@
 }
 
 .Home-logo {
-  height: 120px;
+  height: 100px;
 }
 
 .Home-header {
@@ -15,7 +15,7 @@
 
 .Home-title, .title {
     font-size: 3.5em;
-    margin: 40px;
+    margin: 60px 40px 40px 40px;
     color: white;
     text-align: center;
 }
@@ -34,6 +34,7 @@
 
 .connectivity img {
     padding: 0 10px 0 10px;
+    margin-top: 25px;
 }
 
 .powerImage, .lightingImage, .compassImage {
@@ -54,4 +55,13 @@
 
 #lightSlider, #idleSlider {
     cursor: pointer;
+}
+
+.navigation nav {
+    margin: 0;
+    border-radius: 0 !important;
+}
+
+.pageHeader {
+    margin-top: 0 !important;
 }

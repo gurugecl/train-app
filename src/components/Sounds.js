@@ -12,7 +12,7 @@ class Sounds extends Component {
         return (
             <div className="Sounds">
                 <Grid>
-                    <Row className="row">
+                    <Row className="row pageHeader">
                         <Col md={12}>
                             <h1 className="title"><b>Sounds</b></h1>
                         </Col>

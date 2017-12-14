@@ -21,32 +21,18 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>
         <BrowserRouter basename="/">
             <div>
-                <Switch>
+                <Header />
+                    <Switch>
                     {/*<Route component={ Header }>*/}
                         <Route path='/pictures' component={Pics} />
                         <Route path='/sounds' component={Sounds} />
                         <Route path='/build' component={Build} />
                         <Route exact path='/' component={Home} />
                     {/*</Route>*/}
-                </Switch>
-
-                {/*<NavigationDrawer*/}
-                    {/*drawerTitle="react-md with CRA"*/}
-                    {/*toolbarTitle="Welcome to react-md"*/}
-                    {/*navItems={navItems.map(props => <NavLink {...props} key={props.to} />)}*/}
-                {/*>*/}
-                    {/*<Switch key={location.key}>*/}
-                        {/*<Route exact path="/" location={location} component={Home} />*/}
-                        {/*<Route path="/page-1" location={location} component={Page1} />*/}
-                        {/*<Route path="/page-2" location={location} component={Page2} />*/}
-                        {/*<Route path="/page-3" location={location} component={Page3} />*/}
-                    {/*</Switch>*/}
-                {/*</NavigationDrawer>*/}
+                    </Switch>
             </div>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
 registerServiceWorker();
-
-

@@ -13,7 +13,7 @@ class Build extends Component {
         return (
             <div className="Build">
                 <Grid>
-                    <Row className="row">
+                    <Row className="row pageHeader">
                         <Col md={12}>
                             <h1 className="title"><b>Build</b></h1>
                         </Col>

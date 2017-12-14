@@ -12,7 +12,7 @@ class Pics extends Component {
         return (
             <div className="Pics">
                 <Grid>
-                    <Row className="row">
+                    <Row className="row pageHeader">
                         <Col md={12}>
                             <h1 className="title"><b>Pictures</b></h1>
                         </Col>
