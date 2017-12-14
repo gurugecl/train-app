@@ -1,0 +1,5 @@
+export const LIGHT_SELECTED = 'LIGHT_SELECTED';
+
+export const SPEED_SELECTED = 'SPEED_SELECTED';
+
+
