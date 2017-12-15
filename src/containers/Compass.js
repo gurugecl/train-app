@@ -9,7 +9,7 @@ class Compass extends Component {
     render() {
         console.log(this.props.asdf);
         return (
-            <div className="compass">
+            <div className="compass section">
                 <img src={compass} className="compassImage" alt="compass" />
                 <h1>Compass</h1>
             </div>
@@ -24,7 +24,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectLight: selectLight }, dispatch);
+    return bindActionCreators({ selectLight }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Compass);

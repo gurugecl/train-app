@@ -26,12 +26,12 @@ class Home extends Component {
             <h1 className="Home-title"><b>The Jove Express</b></h1>
         </header>
           <Grid>
-              <Row className="row">
+              <Row className="row comp">
                   <Col md={12}>
                     <Connectivity />
                   </Col>
               </Row>
-              <Row className="row">
+              <Row className="row comp">
                   <Col md={6}>
                     <PowerDial />
                   </Col>
@@ -39,7 +39,7 @@ class Home extends Component {
                     <LightingDial />
                   </Col>
               </Row>
-              <Row className="row">
+              <Row className="row comp slide">
                   <Col md={6}>
                     <SpeedSlider />
                   </Col>
@@ -47,7 +47,7 @@ class Home extends Component {
                     <LightSlider />
                   </Col>
               </Row>
-              <Row className="row">
+              <Row className="row comp slide">
                  <Col md={6}>
                     <CalibrateIdle />
                  </Col>
@@ -55,7 +55,7 @@ class Home extends Component {
                     <CalibrateLight />
                  </Col>
               </Row>
-              <Row className="row">
+              <Row className="row comp">
                   <Col md={12}>
                     <Compass />
                   </Col>

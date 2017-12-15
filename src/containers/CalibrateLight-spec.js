@@ -6,7 +6,7 @@ describe('CalibrateLight', () => {
     const CalibrateLight = shallow(<CalibrateLight />);
 
     it('renders the component placeholder text' , () => {
-        expect(CalibrateLight.find('h1').text()).toEqual('Light Calibrator')
+        expect(CalibrateLight.find('h1').text()).toEqual('Calibrate Ambient Light')
     });
 
 });

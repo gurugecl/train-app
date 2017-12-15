@@ -6,7 +6,7 @@ describe('LightingDial', () => {
     const LightingDial = shallow(<LightingDial />);
 
     it('renders the component placeholder text' , () => {
-        expect(LightingDial.find('h1').text()).toEqual('Lighting Dial')
+        expect(LightingDial.find('h1').text()).toEqual('Lighting')
     });
 
 });

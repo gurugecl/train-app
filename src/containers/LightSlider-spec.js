@@ -6,7 +6,7 @@ describe('LightSlider', () => {
     const LightSlider = shallow(<LightSlider />);
 
     it('renders the component placeholder text' , () => {
-        expect(LightSlider.find('h1').text()).toEqual('Light Slider')
+        expect(LightSlider.find('h1').text()).toEqual('Lights')
     });
 
 });

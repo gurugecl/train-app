@@ -8,7 +8,7 @@ import speed from '../images/speed.jpg';
 class SpeedSlider extends Component {
     render() {
         return (
-            <div className="speedSlider">
+            <div className="speedSlider section">
                 {/*<button onClick={ () => this.props.selectSpeed("fast")}>FAST</button>*/}
                 {/*<button onClick={ () => this.props.selectSpeed("medium")}>MEDIUM</button>*/}
                 {/*<button onClick={ () => this.props.selectSpeed("slow")}>SLOW</button>*/}

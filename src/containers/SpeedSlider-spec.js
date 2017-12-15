@@ -6,7 +6,7 @@ describe('SpeedSlider', () => {
     const SpeedSlider = shallow(<SpeedSlider />);
 
     it('renders the component placeholder text' , () => {
-        expect(SpeedSlider.find('h1').text()).toEqual('Speed Slider')
+        expect(SpeedSlider.find('h1').text()).toEqual('Speed')
     });
 
 });

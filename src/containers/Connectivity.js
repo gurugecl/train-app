@@ -12,7 +12,7 @@ class Connectivity extends Component {
     render() {
         console.log(this.props.asdf);
         return (
-            <div className="connectivity">
+            <div className="connectivity section">
                 <img src={heartbeat} className="heartbeatImage" alt="heartbeat" />
                 <img src={numbers} className="numbersImage" alt="numbers" />
                 <img src={plug} className="plugImage" alt="plug" />
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectLight: selectLight }, dispatch);
+    return bindActionCreators({ selectLight }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connectivity);

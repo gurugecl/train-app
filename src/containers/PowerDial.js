@@ -10,7 +10,7 @@ class PowerDial extends Component {
     render() {
         console.log(this.props.asdf);
         return (
-            <div className="powerDial">
+            <div className="powerDial section">
                 <img src={power} className="powerImage" alt="power" />
                 <h1>Power</h1>
             </div>
@@ -25,7 +25,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectLight: selectLight }, dispatch);
+    return bindActionCreators({ selectLight }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PowerDial);

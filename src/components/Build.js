@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../images/logo.jpg';
 import './Home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';

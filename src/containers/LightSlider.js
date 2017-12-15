@@ -8,7 +8,7 @@ class LightSlider extends Component {
 
     render() {
         return (
-            <div className="lightSlider">
+            <div className="lightSlider section">
                 <button onClick={ () => this.props.selectLight("on") }><b>ON</b></button>
                 <button onClick={ () => this.props.selectLight("off")}><b>OFF</b></button>
                 <button onClick={ () => this.props.selectLight("auto")}><b>AUTOMATIC</b></button>

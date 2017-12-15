@@ -9,7 +9,7 @@ class LightingDial extends Component {
     render() {
 
         return (
-            <div className="lightingDial">
+            <div className="lightingDial section">
                 <img src={lighting} className="lightingImage" alt="light" />
                 <h1>Lighting</h1>
             </div>

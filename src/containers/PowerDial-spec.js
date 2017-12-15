@@ -6,7 +6,7 @@ describe('PowerDial', () => {
     const PowerDial = shallow(<PowerDial />);
 
     it('renders the component placeholder text' , () => {
-        expect(PowerDial.find('h1').text()).toEqual('Power Dial')
+        expect(PowerDial.find('h1').text()).toEqual('Power')
     });
 
 });

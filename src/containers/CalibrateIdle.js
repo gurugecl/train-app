@@ -9,8 +9,10 @@ class CalibrateIdle extends Component {
     render() {
         console.log(this.props.asdf);
         return (
-            <div className="calibrateIdle">
-                <Slider id="idleSlider" className="md-cell md-cell--12" type="range" min={0} max={10} defaultValue={4}/>
+            <div className="calibrateIdle section">
+                <div id="slidecontainer">
+                    <input type="range" min="1" max="100" value="50" className="slider" id="myRange"/>
+                </div>
                 <h1>Calibrate Idle</h1>
             </div>
         );
@@ -25,7 +27,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectLight: selectLight }, dispatch);
+    return bindActionCreators({ selectLight }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalibrateIdle);

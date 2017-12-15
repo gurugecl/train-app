@@ -12,7 +12,7 @@ describe('App', () => {
     const app = shallow(<App />);
 
     it('renders the `Train WebApp` title', () => {
-        expect(app.find('h1').text()).toEqual('Welcome to The Train WebApp')
+        expect(app.find('h1').text()).toEqual('The Jove Express')
     });
 
     // it('renders the StackList', () => {
