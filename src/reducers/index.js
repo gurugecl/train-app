@@ -1,9 +1,12 @@
 import { combineReducers } from "redux";
-import LightReducer from "./reducer_light";
+import { LightValueReducer, LightStatusReducer } from "./reducer_light";
 import SpeedReducer from "./reducer_speed";
+import {IdleValueReducer} from "./reducer_idle";
 
 const rootReducer = combineReducers({
-    lightStatus: LightReducer,
+    lightStatus: LightStatusReducer,
+    lightValue: LightValueReducer,
+    idleValue: IdleValueReducer,
     speedStatus: SpeedReducer
 });
 

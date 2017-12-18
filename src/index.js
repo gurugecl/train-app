@@ -23,12 +23,10 @@ ReactDOM.render(
             <div>
                 <Header />
                     <Switch>
-                    {/*<Route component={ Header }>*/}
                         <Route path='/pictures' component={Pics} />
                         <Route path='/sounds' component={Sounds} />
                         <Route path='/build' component={Build} />
                         <Route exact path='/' component={Home} />
-                    {/*</Route>*/}
                     </Switch>
             </div>
         </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { selectLight } from "../actions/action_light";
+import { selectLightStatus } from "../actions/action_light";
 import '../components/Home.css';
 import lighting from '../images/lighting.gif';
 
@@ -22,7 +22,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ selectLight }, dispatch);
+    return bindActionCreators({ selectLightStatus }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LightingDial);

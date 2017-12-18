@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import  { selectLight } from "../actions/action_light";
+import  { selectLightStatus } from "../actions/action_light";
 import '../components/Home.css';
 
 class LightSlider extends Component {
@@ -9,22 +9,23 @@ class LightSlider extends Component {
     render() {
         return (
             <div className="lightSlider section">
-                <button onClick={ () => this.props.selectLight("on") }><b>ON</b></button>
-                <button onClick={ () => this.props.selectLight("off")}><b>OFF</b></button>
-                <button onClick={ () => this.props.selectLight("auto")}><b>AUTOMATIC</b></button>
+                <h1 className="lightStatusText">The Light is Set To { this.props.lightStatus }</h1>
+                <button onClick={ () => this.props.selectLightStatus("On") }><b>ON</b></button>
+                <button onClick={ () => this.props.selectLightStatus("Off")}><b>OFF</b></button>
+                <button onClick={ () => this.props.selectLightStatus("Auto")}><b>AUTOMATIC</b></button>
                 <h1>Lights</h1>
             </div>
         );
     }
 }
 
-function mapStateToProps(lightStatus) {
+function mapStateToProps({ lightStatus }) {
     console.log("The light is " + lightStatus);
-    return { lightStatus };
+    return { lightStatus } ;
 }
 
 function mapDispatchToProps(dispatch) {
-        return bindActionCreators({selectLight}, dispatch);
+        return bindActionCreators({selectLightStatus}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LightSlider);

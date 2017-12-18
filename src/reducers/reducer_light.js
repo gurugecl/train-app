@@ -1,11 +1,25 @@
 import {LIGHT_SELECTED} from "../constants";
+import {LIGHT_VALUE} from '../constants';
 
-const initialState = "auto";
+const initialLightStatus = "Auto";
+const initialLightValue = 50;
 
-export default function(state = initialState, action) {
+export const LightStatusReducer = (state = initialLightStatus, action) => {
     switch (action.type) {
         case LIGHT_SELECTED:
             return action.payload;
-    }
+        // this should not be action.payload because it returns all the state
+        default:
             return state;
-}
+    }
+};
+
+export const LightValueReducer = (state = initialLightValue, action) => {
+    switch (action.type) {
+        case LIGHT_VALUE:
+            return action.payload;
+        // this should not be action.payload because it returns all the state
+        default:
+            return state;
+    }
+};

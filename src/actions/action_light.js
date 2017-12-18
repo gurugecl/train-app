@@ -1,9 +1,16 @@
 import { LIGHT_SELECTED } from '../constants';
+import { LIGHT_VALUE } from '../constants';
 
-export const selectLight = (lightStatus)=> {
-    console.log("Light switched to " + lightStatus);
+export const selectLightStatus = (lightStatus) => {
     return {
         type: LIGHT_SELECTED,
         payload: lightStatus
+    }
+};
+
+export const selectLightValue = (lightValue) => {
+    return {
+        type: LIGHT_VALUE,
+        payload: lightValue
     }
 };
