@@ -14,7 +14,7 @@ class Sounds extends Component {
                 <Grid>
                     <Row className="row pageHeader">
                         <Col md={12}>
-                            <h1 className="title"><b>Sounds</b></h1>
+                            <h1 className="title"><b>Sound</b></h1>
                         </Col>
                     </Row>
                 </Grid>

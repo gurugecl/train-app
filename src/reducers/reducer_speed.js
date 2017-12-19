@@ -1,11 +1,12 @@
 import {SPEED_SELECTED} from "../constants";
 
-const initialState = "medium";
+const initialSpeed = 0;
 
-export default function(state = initialState, action) {
+export const SpeedReducer = (state = initialSpeed, action) => {
     switch (action.type) {
         case SPEED_SELECTED:
             return action.payload;
+        default:
+            return state;
     }
-    return state;
-}
+};

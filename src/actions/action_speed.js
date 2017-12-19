@@ -1,9 +1,8 @@
 import { SPEED_SELECTED } from '../constants';
 
-export const selectSpeed = (speedStatus)=> {
-    console.log("Speed switched to " + speedStatus);
+export const selectSpeed = (speedValue)=> {
     return {
         type: SPEED_SELECTED,
-        payload: speedStatus
+        payload: speedValue
     }
 };

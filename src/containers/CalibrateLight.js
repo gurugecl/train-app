@@ -10,7 +10,7 @@ class CalibrateLight extends Component {
         return (
             <div className="calibrateLight section">
                 <p id="demo">Ambient Light: <span>{this.props.lightValue}</span></p>
-                <div id="slidecontainer" onSubmit={ () => this.props.selectLightValue(50) }>
+                <div id="slidecontainer" onSubmit={ () => this.props.selectLightValue() }>
                     <input type="range" min="1" max="100" value="50" className="slider" id="myRange"/>
                 </div>
                 <h1>Calibrate Ambient Light</h1>

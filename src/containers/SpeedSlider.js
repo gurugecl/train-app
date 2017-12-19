@@ -3,26 +3,24 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { selectSpeed } from "../actions/action_speed";
 import '../components/Home.css';
-import speed from '../images/speed.jpg';
 
 class SpeedSlider extends Component {
     render() {
         return (
-            <div className="speedSlider section">
-                {/*<button onClick={ () => this.props.selectSpeed("fast")}>FAST</button>*/}
-                {/*<button onClick={ () => this.props.selectSpeed("medium")}>MEDIUM</button>*/}
-                {/*<button onClick={ () => this.props.selectSpeed("slow")}>SLOW</button>*/}
-                {/*<button onClick={ () => this.props.selectSpeed("stop")}>STOP</button>*/}
-                <img src={speed} className="speedImage" alt="speed" />
+            <div className="speedslider section">
+                <p id="demo"><span>{this.props.speedValue}</span> mph</p>
+                <div id="slidecontainer" onSubmit={ () => this.props.selectSpeed(0) }>
+                    <input type="range" min="-100" max="100" value="0" className="speedSlider" id="Range"/>
+                </div>
                 <h1>Speed</h1>
             </div>
         );
     }
 }
 
-function mapStateToProps(speedStatus) {
-    // console.log("The speed is set to " + speedStatus);
-    return { speedStatus };
+function mapStateToProps({speedValue}) {
+    console.log("The speed is set to " + speedValue);
+    return { speedValue };
 }
 
 function mapDispatchToProps(dispatch) {

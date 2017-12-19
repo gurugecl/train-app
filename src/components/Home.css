@@ -41,6 +41,10 @@
     margin-top: 25px;
 }
 
+.speedslider {
+   margin-top: 40px;
+}
+
 .powerImage, .lightingImage, .compassImage {
     height: 300px;
     width: 300px;
@@ -122,10 +126,53 @@
 }
 
 .speedSlider {
-    margin-top: 50px !important;
+    /*margin-top: 50px !important;*/
 }
 
 #demo {
     color: white;
     font-size: 40px;
 }
+
+/*Speed slider*/
+
+.speedSlider {
+    -webkit-appearance: none;
+    width: 350px !important;
+    height: 50px;
+    background-image: url("../images/speed.jpg");
+    background-size: cover;
+    background-position: 7px ;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border: 1px solid black;
+    margin-top: 30px;
+}
+
+#Range {
+    display: block;
+    margin-left: 100px !important;
+}
+
+.speedSlider:hover {
+    opacity: 1;
+}
+
+.speedSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 50px;
+    background: red;
+    cursor: pointer;
+}
+
+.speedSlider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4d5c8e;
+    cursor: pointer;
+}
+
