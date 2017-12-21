@@ -20,7 +20,6 @@ class LightSlider extends Component {
 }
 
 function mapStateToProps({ lightStatus }) {
-    console.log("The light is " + lightStatus);
     return { lightStatus } ;
 }
 

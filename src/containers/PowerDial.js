@@ -8,7 +8,7 @@ import power from '../images/power.gif';
 
 class PowerDial extends Component {
     render() {
-        console.log(this.props.asdf);
+        // console.log(this.props.asdf);
         return (
             <div className="powerDial section">
                 <img src={power} className="powerImage" alt="power" />
@@ -18,14 +18,14 @@ class PowerDial extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        asdf: '123'
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         asdf: '123'
+//     }
+// }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectLightStatus }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PowerDial);
+export default connect(null, mapDispatchToProps)(PowerDial);

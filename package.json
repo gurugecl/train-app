@@ -13,6 +13,7 @@
     "redux-thunk": "^2.2.0"
   },
   "dependencies": {
+    "async-middleware": "^1.2.1",
     "bootstrap": "^3.3.7",
     "bootstrap-slider": "^10.0.0",
     "prop-types": "^15.6.0",

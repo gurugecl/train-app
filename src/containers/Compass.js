@@ -7,7 +7,6 @@ import compass from '../images/compass.gif';
 
 class Compass extends Component {
     render() {
-        console.log(this.props.asdf);
         return (
             <div className="compass section">
                 <img src={compass} className="compassImage" alt="compass" />
@@ -17,14 +16,14 @@ class Compass extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        asdf: '123'
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         asdf: '123'
+//     }
+// }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectLightStatus }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Compass);
+export default connect(null, mapDispatchToProps)(Compass);

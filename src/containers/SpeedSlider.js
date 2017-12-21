@@ -9,8 +9,8 @@ class SpeedSlider extends Component {
         return (
             <div className="speedslider section">
                 <p id="demo"><span>{this.props.speedValue}</span> mph</p>
-                <div id="slidecontainer" onSubmit={ () => this.props.selectSpeed(0) }>
-                    <input type="range" min="-100" max="100" value="0" className="speedSlider" id="Range"/>
+                <div id="slidecontainer" onClick={ () => this.props.selectSpeed(this.myInput.value) }>
+                    <input type="range" min="-100" max="100" className="speedSlider" id="Range" ref={ref => this.myInput = ref}/>
                 </div>
                 <h1>Speed</h1>
             </div>
@@ -19,7 +19,6 @@ class SpeedSlider extends Component {
 }
 
 function mapStateToProps({speedValue}) {
-    console.log("The speed is set to " + speedValue);
     return { speedValue };
 }
 

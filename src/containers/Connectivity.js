@@ -10,7 +10,6 @@ import heartbeat from '../images/heartbeat.gif';
 
 class Connectivity extends Component {
     render() {
-        console.log(this.props.asdf);
         return (
             <div className="connectivity section">
                 <img src={heartbeat} className="heartbeatImage" alt="heartbeat" />
@@ -22,14 +21,14 @@ class Connectivity extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        asdf: '123'
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         asdf: '123'
+//     }
+// }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectLightStatus }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connectivity);
+export default connect(null, mapDispatchToProps)(Connectivity);

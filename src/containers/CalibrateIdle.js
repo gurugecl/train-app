@@ -9,8 +9,8 @@ class CalibrateIdle extends Component {
         return (
             <div className="calibrateIdle section">
                 <p id="demo">Idle: <span>{this.props.idleValue}</span></p>
-                <div id="slidecontainer" onSubmit={ () => this.props.selectIdleValue() }>
-                    <input type="range" min="1" max="100" value="50" className="slider" id="myRange"/>
+                <div id="slidecontainer" onClick={ () => this.props.selectIdleValue(this.myInput.value) }>
+                    <input type="range" min="1" max="100" className="slider" id="myRange" ref={ref => this.myInput = ref}/>
                 </div>
                 <h1>Calibrate Idle</h1>
             </div>
@@ -19,7 +19,6 @@ class CalibrateIdle extends Component {
 }
 
 function mapStateToProps({idleValue}) {
-    console.log("The light is " + idleValue);
         return { idleValue };
 }
 

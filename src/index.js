@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
-import ReduxPromise from 'redux-promise';
+import Async from './middlewares/async';
 import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
@@ -15,7 +15,7 @@ import Pics from './components/Pics';
 import Sounds from './components/Sounds';
 import Build from './components/Build';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise,thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(Async, thunk)(createStore);
 
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(rootReducer)}>

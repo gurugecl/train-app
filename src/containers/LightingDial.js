@@ -17,12 +17,12 @@ class LightingDial extends Component {
     }
 }
 
-function mapStateToProps (state) {
-    return { state };
-}
+// function mapStateToProps (state) {
+//     return { state };
+// }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectLightStatus }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LightingDial);
+export default connect(null, mapDispatchToProps)(LightingDial);
