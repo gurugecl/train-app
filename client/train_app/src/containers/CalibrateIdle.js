@@ -22,7 +22,6 @@ function mapStateToProps({idleValue}) {
         return { idleValue };
 }
 
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ selectIdleValue }, dispatch);
 }

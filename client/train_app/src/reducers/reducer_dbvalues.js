@@ -2,9 +2,9 @@ import {PROFILE_DBDATA} from "../constants";
 import {LIGHT_DBDATA} from '../constants';
 import {VOLTAGE_DBDATA} from "../constants";
 
-const initialProfileData = "";
-const initialVoltageData = "";
-const initialLightData = "";
+const initialProfileData = [];
+const initialVoltageData = [];
+const initialLightData = [];
 
 export const ProfileDbReducer = (state = initialProfileData, action) => {
     switch (action.type) {

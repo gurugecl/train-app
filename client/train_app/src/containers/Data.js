@@ -10,29 +10,18 @@ import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import '../components/Home.css';
 
-let light;
-let voltage;
+// let light;
+// let voltage;
+// let profiles;
 
 class Build extends Component {
 
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         profiles: [],
-    //         light: [],
-    //         voltage: []
-    //     }
-    // }
-
     componentDidMount() {
-        let that = this;
         fetch('http://localhost:3000/profiles')
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                        that.setState({
-                            profiles: data
-                        })
+                        profileFromDb(data);
                     })
             });
 
@@ -41,25 +30,21 @@ class Build extends Component {
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                        that.setState({
-                            light: data
-                        })
+                            lightFromDb(data);
                     })
             });
         fetch('http://localhost:3000/voltage')
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                        that.setState({
-                            voltage: data
-                        })
+                            voltageFromDb(data);
                     })
             })
     };
 
     removeProfile(id) {
         let that = this;
-        let profiles = this.state.profiles;
+        let profiles = profileFromDb();
         let profile = profiles.find(function (profile){
             return profile.id === id
         });
@@ -84,8 +69,8 @@ class Build extends Component {
         let that = this;
         event.preventDefault();
         let profile_data = {
-            profile_name: this.refs.profile_name.value,
-            profile_permission: this.refs.profile_permission.value,
+            name: this.refs.profile_name.value,
+            permission: this.refs.profile_permission.value,
             id: Math.random().toFixed(3)
         };
         let request = new Request('http://localhost:3000/new-profile', {
@@ -95,9 +80,9 @@ class Build extends Component {
         });
         let profiles= that.state.profiles;
         profiles.push(profile_data);
-        that.setState({
-            profiles
-        });
+       // that.setState({
+            profileFromDb = profiles;
+      //  });
 
         fetch(request)
             .then(function (response){
@@ -113,6 +98,8 @@ class Build extends Component {
 
     render() {
         let profiles = this.state.profiles;
+        let light = this.state.light;
+        let voltage = this.state.voltage;
         return (
             <div className="Build">
                 <Grid>
@@ -130,19 +117,19 @@ class Build extends Component {
                                 <button onClick={this.addProfile.bind(this)}>Add Profile</button>
                             </form>
                             <ul>
-                                {profiles.map(profile => <li key={profile.id}>{profile.profile_name} {profile.profile_name} <button onSubmit={this.removeProfile.bind(this, profile.id)}>Remove</button> </li>)}
+                                {profiles.map(profile => <li key={profile.id}>{profile.name} {profile.permission} <button onSubmit={this.removeProfile.bind(this, profile.id)}>Remove Profile</button> </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data lightData"><b>Light Data</b></h1>
                             <ul>
-                                {light.map(light => <li key={light.id}>{light.light_level} {light.light_amount} </li>)}
+                                {light.map(light => <li key={light.id}>{light.level} {light.amount} </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data voltageData"><b>Voltage Data</b></h1>
                             <ul>
-                                {voltage.map(voltage => <li key={voltage.id}>{voltage.voltage_level} {voltage.voltage_amount} </li>)}
+                                {voltage.map(voltage => <li key={voltage.id}>{voltage.level} {voltage.amount} </li>)}
                             </ul>
                         </Col>
                     </Row>
