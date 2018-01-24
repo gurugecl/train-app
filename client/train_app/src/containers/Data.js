@@ -10,55 +10,50 @@ import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import '../components/Home.css';
 
-// let light;
-// let voltage;
-// let profiles;
-
 class Build extends Component {
 
     componentDidMount() {
+        //check code for multiple fetch calls
         fetch('http://localhost:3000/profiles')
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                        profileFromDb(data);
+                        //check on this. profileFromDb(data);
+                        this.props.profileFromDb(data);
                     })
             });
-
-        //re-write this section
         fetch('http://localhost:3000/light')
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                            lightFromDb(data);
+                        this.props.lightFromDb(data);
                     })
             });
         fetch('http://localhost:3000/voltage')
             .then(function(response){
                 response.json()
                     .then(function(data) {
-                            voltageFromDb(data);
+                        this.props.voltageFromDb(data);
                     })
             })
     };
 
     removeProfile(id) {
-        let that = this;
-        let profiles = profileFromDb();
+        //check line below
+        let profiles = this.props.profileFromDb();
         let profile = profiles.find(function (profile){
             return profile.id === id
         });
 
-        let request = new Request ('http://localhost:3000/remove/' + id, {
+        let request = new Request (`http://localhost:3000/remove/ ${id}`, {
             method: 'DELETE'
         });
 
         fetch(request)
             .then(function(response){
                 profiles.splice(profiles.indexOf(profile), 1);
-                that.setState({
-                     profiles
-                });
+                //check code below. updating the state for profile
+                this.props.profileFromDb(profile);
                 response.json()
                     .then(function(data) {
                     })
@@ -66,23 +61,20 @@ class Build extends Component {
     };
 
    addProfile(event){
-        let that = this;
         event.preventDefault();
         let profile_data = {
-            name: this.refs.profile_name.value,
-            permission: this.refs.profile_permission.value,
+            name: this.props.profileFromDb(this.nameInput.value),
+            permission: this.props.profileFromDb(this.permissionInput.value),
             id: Math.random().toFixed(3)
         };
-        let request = new Request('http://localhost:3000/new-profile', {
+        let request = new Request('http://localhost:3000/profile', {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(profile_data)
         });
-        let profiles= that.state.profiles;
+        let profiles = this.props.profileFromDb;
         profiles.push(profile_data);
-       // that.setState({
-            profileFromDb = profiles;
-      //  });
+        this.props.profileFromDb(data);
 
         fetch(request)
             .then(function (response){
@@ -95,11 +87,7 @@ class Build extends Component {
             })
     };
 
-
     render() {
-        let profiles = this.state.profiles;
-        let light = this.state.light;
-        let voltage = this.state.voltage;
         return (
             <div className="Build">
                 <Grid>
@@ -112,24 +100,24 @@ class Build extends Component {
                         <Col md={4}>
                             <h1 className="data profileData"><b>Profiles</b></h1>
                             <form ref="profileForm">
-                                <input type="text" ref="profile_name" placeholder="Name" />
-                                <input type="text" ref="profile_permission" placeholder="Permissions" />
+                                <input type="text" ref={ref => this.nameInput = ref} placeholder="Name" />
+                                <input type="text" ref={ref => this.permissionInput = ref} placeholder="Permissions" />
                                 <button onClick={this.addProfile.bind(this)}>Add Profile</button>
                             </form>
                             <ul>
-                                {profiles.map(profile => <li key={profile.id}>{profile.name} {profile.permission} <button onSubmit={this.removeProfile.bind(this, profile.id)}>Remove Profile</button> </li>)}
+                                {this.props.profileDbValue.map(profile => <li key={profile.id}>{profile.name} {profile.permission} <button onSubmit={this.removeProfile.bind(this, profile.id)}>Remove Profile</button> </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data lightData"><b>Light Data</b></h1>
                             <ul>
-                                {light.map(light => <li key={light.id}>{light.level} {light.amount} </li>)}
+                                {this.props.lightDbValue.map(light => <li key={light.id}>{light.level} {light.amount} </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data voltageData"><b>Voltage Data</b></h1>
                             <ul>
-                                {voltage.map(voltage => <li key={voltage.id}>{voltage.level} {voltage.amount} </li>)}
+                                {this.props.voltageDbValue.map(voltage => <li key={voltage.id}>{voltage.level} {voltage.amount} </li>)}
                             </ul>
                         </Col>
                     </Row>
