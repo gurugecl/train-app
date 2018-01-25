@@ -16,51 +16,52 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-
 class Home extends Component {
   render() {
     return (
       <div className="Home">
         <header className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
-            <h1 className="Home-title"><b>The Jove Express</b></h1>
+          <h1 className="Home-title">
+            <b>The Jove Express</b>
+          </h1>
         </header>
-          <Grid>
-              <Row className="row comp">
-                  <Col md={12}>
-                    <Connectivity />
-                  </Col>
-              </Row>
-              <Row className="row comp">
-                  <Col md={6}>
-                    <PowerDial />
-                  </Col>
-                  <Col md={6}>
-                    <LightingDial />
-                  </Col>
-              </Row>
-              <Row className="row comp slide">
-                  <Col md={6}>
-                    <SpeedSlider />
-                  </Col>
-                  <Col md={6}>
-                    <LightSlider />
-                  </Col>
-              </Row>
-              <Row className="row comp slide">
-                 <Col md={6}>
-                    <CalibrateIdle />
-                 </Col>
-                 <Col md={6}>
-                    <CalibrateLight />
-                 </Col>
-              </Row>
-              <Row className="row comp">
-                  <Col md={12}>
-                    <Compass />
-                  </Col>
-              </Row>
-          </Grid>
+        <Grid>
+          <Row className="row comp">
+            <Col md={12}>
+              <Connectivity />
+            </Col>
+          </Row>
+          <Row className="row comp">
+            <Col md={6}>
+              <PowerDial />
+            </Col>
+            <Col md={6}>
+              <LightingDial />
+            </Col>
+          </Row>
+          <Row className="row comp slide">
+            <Col md={6}>
+              <SpeedSlider />
+            </Col>
+            <Col md={6}>
+              <LightSlider />
+            </Col>
+          </Row>
+          <Row className="row comp slide">
+            <Col md={6}>
+              <CalibrateIdle />
+            </Col>
+            <Col md={6}>
+              <CalibrateLight />
+            </Col>
+          </Row>
+          <Row className="row comp">
+            <Col md={12}>
+              <Compass />
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

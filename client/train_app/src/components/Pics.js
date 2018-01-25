@@ -6,21 +6,22 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-
 class Pics extends Component {
-    render() {
-        return (
-            <div className="Pics">
-                <Grid>
-                    <Row className="row pageHeader">
-                        <Col md={12}>
-                            <h1 className="title"><b>Pictures</b></h1>
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="Pics">
+        <Grid>
+          <Row className="row pageHeader">
+            <Col md={12}>
+              <h1 className="title">
+                <b>Pictures</b>
+              </h1>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default Pics;

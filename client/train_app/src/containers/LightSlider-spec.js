@@ -3,10 +3,9 @@ import { shallow } from 'enzyme';
 import LightSlider from 'src/containers/LightSlider';
 
 describe('LightSlider', () => {
-    const LightSlider = shallow(<LightSlider />);
+  const LightSlider = shallow(<LightSlider />);
 
-    it('renders the component placeholder text' , () => {
-        expect(LightSlider.find('h1').text()).toEqual('Lights')
-    });
-
+  it('renders the component placeholder text', () => {
+    expect(LightSlider.find('h1').text()).toEqual('Lights');
+  });
 });

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
@@ -18,19 +18,19 @@ import Data from './containers/Data';
 const createStoreWithMiddleware = applyMiddleware(Async, thunk)(createStore);
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(rootReducer)}>
-        <BrowserRouter basename="/">
-            <div>
-                <Header />
-                    <Switch>
-                        <Route path='/pictures' component={Pics} />
-                        <Route path='/sounds' component={Sounds} />
-                        <Route path='/data' component={Data} />
-                        <Route exact path='/' component={Home} />
-                    </Switch>
-            </div>
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={createStoreWithMiddleware(rootReducer)}>
+    <BrowserRouter basename="/">
+      <div>
+        <Header />
+        <Switch>
+          <Route path="/pictures" component={Pics} />
+          <Route path="/sounds" component={Sounds} />
+          <Route path="/data" component={Data} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root'),
 );
 registerServiceWorker();

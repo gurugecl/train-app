@@ -4,10 +4,9 @@ import { shallow } from 'enzyme';
 import Pics from 'Pics';
 
 describe('Pics', () => {
-    const pics = shallow(<Pics />);
+  const pics = shallow(<Pics />);
 
-    it('renders the Pics component', () => {
-        expect(pics.find('h1').text()).toEqual('Pictures')
-    });
-
+  it('renders the Pics component', () => {
+    expect(pics.find('h1').text()).toEqual('Pictures');
+  });
 });

@@ -3,10 +3,9 @@ import { shallow } from 'enzyme';
 import CalibrateLight from 'src/containers/CalibrateLight';
 
 describe('CalibrateLight', () => {
-    const CalibrateLight = shallow(<CalibrateLight />);
+  const CalibrateLight = shallow(<CalibrateLight />);
 
-    it('renders the component placeholder text' , () => {
-        expect(CalibrateLight.find('h1').text()).toEqual('Calibrate Ambient Light')
-    });
-
+  it('renders the component placeholder text', () => {
+    expect(CalibrateLight.find('h1').text()).toEqual('Calibrate Ambient Light');
+  });
 });
