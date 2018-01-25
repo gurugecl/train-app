@@ -10,7 +10,6 @@ export const ProfileDbReducer = (state = initialProfileData, action) => {
     switch (action.type) {
         case PROFILE_DBDATA:
             return action.payload;
-        // this should not be action.payload because it returns all the state
         default:
             return state;
     }
@@ -20,7 +19,6 @@ export const LightDbReducer = (state = initialVoltageData, action) => {
     switch (action.type) {
         case LIGHT_DBDATA:
             return action.payload;
-        // this should not be action.payload because it returns all the state
         default:
             return state;
     }
@@ -30,7 +28,6 @@ export const VoltageDbReducer = (state = initialLightData, action) => {
     switch (action.type) {
         case VOLTAGE_DBDATA:
             return action.payload;
-        // this should not be action.payload because it returns all the state
         default:
             return state;
     }

@@ -10,42 +10,26 @@ import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 import '../components/Home.css';
 
+const URL_PREFIX = 'http://localhost:3001/';
+
 class Build extends Component {
 
-    componentDidMount() {
-        //check code for multiple fetch calls
-        fetch('http://localhost:3000/profiles')
-            .then(function(response){
-                response.json()
-                    .then(function(data) {
-                        //check on this. profileFromDb(data);
-                        this.props.profileFromDb(data);
-                    })
-            });
-        fetch('http://localhost:3000/light')
-            .then(function(response){
-                response.json()
-                    .then(function(data) {
-                        this.props.lightFromDb(data);
-                    })
-            });
-        fetch('http://localhost:3000/voltage')
-            .then(function(response){
-                response.json()
-                    .then(function(data) {
-                        this.props.voltageFromDb(data);
-                    })
-            })
+    async componentDidMount() {
+        const apiRequestProfiles = fetch(`${URL_PREFIX}profiles`);
+        const apiRequestLight = fetch(`${URL_PREFIX}light`);
+        const apiRequestVoltage = fetch(`${URL_PREFIX}voltage`);
+        const [profiles, light, voltage ] = await Promise.all([apiRequestProfiles,apiRequestLight,apiRequestVoltage]);
+        this.props.profileFromDb(await profiles.json());
+        this.props.lightFromDb(await light.json());
+        this.props.voltageFromDb(await voltage.json());
     };
 
     removeProfile(id) {
         //check line below
-        let profiles = this.props.profileFromDb();
-        let profile = profiles.find(function (profile){
-            return profile.id === id
-        });
+        let profiles = this.props.profileDbValue;
+        let profile = profiles.find(profile => profile.id === id);
 
-        let request = new Request (`http://localhost:3000/remove/ ${id}`, {
+        let request = new Request (`${URL_PREFIX}remove/ ${id}`, {
             method: 'DELETE'
         });
 
@@ -67,14 +51,15 @@ class Build extends Component {
             permission: this.props.profileFromDb(this.permissionInput.value),
             id: Math.random().toFixed(3)
         };
-        let request = new Request('http://localhost:3000/profile', {
+        let request = new Request(`${URL_PREFIX}profile`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(profile_data)
         });
-        let profiles = this.props.profileFromDb;
+        //below correct?
+        let profiles = this.props.profileDbValue;
         profiles.push(profile_data);
-        this.props.profileFromDb(data);
+        this.props.profileFromDb(profiles);
 
         fetch(request)
             .then(function (response){
@@ -88,6 +73,7 @@ class Build extends Component {
     };
 
     render() {
+        const {profileDbValue, lightDbValue, voltageDbValue} = this.props;
         return (
             <div className="Build">
                 <Grid>
@@ -105,19 +91,19 @@ class Build extends Component {
                                 <button onClick={this.addProfile.bind(this)}>Add Profile</button>
                             </form>
                             <ul>
-                                {this.props.profileDbValue.map(profile => <li key={profile.id}>{profile.name} {profile.permission} <button onSubmit={this.removeProfile.bind(this, profile.id)}>Remove Profile</button> </li>)}
+                                {profileDbValue.map(profiles => <li key={profiles.id}>{profiles.name} {profiles.permission} <button onSubmit={this.removeProfile.bind(this, profiles.id)}>Remove Profile</button> </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data lightData"><b>Light Data</b></h1>
                             <ul>
-                                {this.props.lightDbValue.map(light => <li key={light.id}>{light.level} {light.amount} </li>)}
+                                {lightDbValue.map(light => <li key={light.id}>{light.level} {light.amount} </li>)}
                             </ul>
                         </Col>
                         <Col md={4}>
                             <h1 className="data voltageData"><b>Voltage Data</b></h1>
                             <ul>
-                                {this.props.voltageDbValue.map(voltage => <li key={voltage.id}>{voltage.level} {voltage.amount} </li>)}
+                                {voltageDbValue.map(voltage => <li key={voltage.id}>{voltage.level} {voltage.amount} </li>)}
                             </ul>
                         </Col>
                     </Row>

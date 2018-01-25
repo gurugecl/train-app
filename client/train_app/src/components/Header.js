@@ -18,7 +18,7 @@ class Header extends Component {
                                 <li><Link to="/" activeClassName="active"><b>Motor/Lights</b></Link></li>
                                 <li><Link to="/pictures" activeClassName="active"><b>Pictures</b></Link></li>
                                 <li><Link to="/sounds" activeClassName="active"><b>Sound</b></Link></li>
-                                <li><Link to="./containers/data" activeClassName="active"><b>Data</b></Link></li>
+                                <li><Link to="/data" activeClassName="active"><b>Data</b></Link></li>
                             </ul>
                         </div>
                     </div>
