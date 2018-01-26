@@ -150,10 +150,16 @@ class Build extends Component {
 }
 
 function mapStateToProps({ profileDbValue, lightDbValue, voltageDbValue }) {
+  console.log(`profileDbValue is ${profileDbValue}`);
+  console.log(`lightDbValue is ${lightDbValue}`);
+  console.log(`voltageDbValue is ${voltageDbValue}`);
   return { profileDbValue, lightDbValue, voltageDbValue };
 }
 
 function mapDispatchToProps(dispatch) {
+    console.log(`profileFromDb is ${profileFromDb}`);
+    console.log(`lightFromDb is ${lightFromDb}`);
+    console.log(`voltageFromDb is ${voltageFromDb}`);
   return bindActionCreators(
     { profileFromDb, lightFromDb, voltageFromDb },
     dispatch,
