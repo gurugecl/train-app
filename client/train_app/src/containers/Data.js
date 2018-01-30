@@ -16,7 +16,7 @@ import '../components/Home.css';
 
 const URL_PREFIX = 'http://localhost:3001/';
 
-class Build extends Component {
+class Data extends Component {
   async componentDidMount() {
     const apiRequestProfiles = fetch(`${URL_PREFIX}profiles`);
     const apiRequestLight = fetch(`${URL_PREFIX}light`);
@@ -26,7 +26,9 @@ class Build extends Component {
       apiRequestLight,
       apiRequestVoltage,
     ]);
-    this.props.profileFromDb(await profiles.json());
+    const json = await profiles.json();
+    console.log(json);
+    this.props.profileFromDb(json);
     this.props.lightFromDb(await light.json());
     this.props.voltageFromDb(await voltage.json());
   }
@@ -43,20 +45,37 @@ class Build extends Component {
       let response = await fetch(request);
       profiles.splice(profiles.indexOf(profile), 1);
       this.props.profileFromDb(profile);
+      // console.log("Remove Profile", response.json());
       return response.json();
     } catch (err) {
       console.log(err);
     }
   }
 
+  async clearAllProfiles() {
+      let profiles = this.props.profileDbValue;
+
+      let request = new Request(`${URL_PREFIX}/profiles`, {
+          method: 'DELETE',
+      });
+      try {
+          let response = await fetch(request);
+          profiles = [];
+          this.props.profileFromDb(profiles);
+          return response.json();
+      } catch (err) {
+          console.log(err);
+      }
+  }
+
   async addProfile(event) {
     event.preventDefault();
     let profile_data = {
       name: this.props.profileFromDb(this.nameInput.value),
-      permission: this.props.profileFromDb(this.permissionInput.value),
+      environment: this.props.profileFromDb(this.environmentInput.value),
       id: Math.random().toFixed(3),
     };
-    let request = new Request(`${URL_PREFIX}profile`, {
+    let request = new Request(`${URL_PREFIX}profiles`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(profile_data),
@@ -75,6 +94,10 @@ class Build extends Component {
 
   render() {
     const { profileDbValue, lightDbValue, voltageDbValue } = this.props;
+
+    // if (!profileDbValue || !voltageDbValue || !lightDbValue) {
+    //   return null;
+    // }
     return (
       <div className="Build">
         <Grid>
@@ -98,24 +121,25 @@ class Build extends Component {
                 />
                 <input
                   type="text"
-                  ref={ref => (this.permissionInput = ref)}
-                  placeholder="Permissions"
+                  ref={ref => (this.environmentInput = ref)}
+                  placeholder="Environments"
                 />
-                <button onClick={this.addProfile.bind(this)}>
+                <button className="dataButton" onClick={this.addProfile.bind(this)}>
                   Add Profile
                 </button>
               </form>
               <ul>
                 {profileDbValue.map(profiles => (
-                  <li key={profiles.id}>
-                    {profiles.name} {profiles.permission}{' '}
-                    <button
-                      onSubmit={this.removeProfile.bind(this, profiles.id)}
+                  <ul className="dataRows" key={profiles.id}>
+                    {profiles.name} {profiles.environment}{' '}
+                    <button className="dataButton"
+                      onClick={this.removeProfile.bind(this, profiles.id)}
                     >
                       Remove Profile
                     </button>{' '}
-                  </li>
+                  </ul>
                 ))}
+                  <button className="dataButton" onClick={this.clearAllProfiles.bind(this)}>Clear All</button>
               </ul>
             </Col>
             <Col md={4}>
@@ -124,9 +148,9 @@ class Build extends Component {
               </h1>
               <ul>
                 {lightDbValue.map(light => (
-                  <li key={light.id}>
+                  <ul key={light.id}>
                     {light.level} {light.amount}{' '}
-                  </li>
+                  </ul>
                 ))}
               </ul>
             </Col>
@@ -136,9 +160,9 @@ class Build extends Component {
               </h1>
               <ul>
                 {voltageDbValue.map(voltage => (
-                  <li key={voltage.id}>
+                  <ul key={voltage.id}>
                     {voltage.level} {voltage.amount}{' '}
-                  </li>
+                  </ul>
                 ))}
               </ul>
             </Col>
@@ -149,21 +173,18 @@ class Build extends Component {
   }
 }
 
-function mapStateToProps({ profileDbValue, lightDbValue, voltageDbValue }) {
-  console.log(`profileDbValue is ${profileDbValue}`);
-  console.log(`lightDbValue is ${lightDbValue}`);
-  console.log(`voltageDbValue is ${voltageDbValue}`);
+function mapStateToProps(state) {
+  const { profileDbValue, lightDbValue, voltageDbValue } = state;
+  console.log({ state });
+
   return { profileDbValue, lightDbValue, voltageDbValue };
 }
 
 function mapDispatchToProps(dispatch) {
-    console.log(`profileFromDb is ${profileFromDb}`);
-    console.log(`lightFromDb is ${lightFromDb}`);
-    console.log(`voltageFromDb is ${voltageFromDb}`);
   return bindActionCreators(
     { profileFromDb, lightFromDb, voltageFromDb },
     dispatch,
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Build);
+export default connect(mapStateToProps, mapDispatchToProps)(Data);

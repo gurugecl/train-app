@@ -6,7 +6,10 @@ const initialProfileData = [];
 const initialVoltageData = [];
 const initialLightData = [];
 
-export const ProfileDbReducer = (state = initialProfileData, action) => {
+export const ProfileDbReducer = (
+  state = initialProfileData,
+  action,
+) => {
   switch (action.type) {
     case PROFILE_DBDATA:
       return action.payload;
@@ -15,7 +18,10 @@ export const ProfileDbReducer = (state = initialProfileData, action) => {
   }
 };
 
-export const LightDbReducer = (state = initialVoltageData, action) => {
+export const LightDbReducer = (
+  state = initialLightData,
+  action,
+) => {
   switch (action.type) {
     case LIGHT_DBDATA:
       return action.payload;
@@ -24,7 +30,10 @@ export const LightDbReducer = (state = initialVoltageData, action) => {
   }
 };
 
-export const VoltageDbReducer = (state = initialLightData, action) => {
+export const VoltageDbReducer = (
+  state = initialVoltageData,
+  action,
+) => {
   switch (action.type) {
     case VOLTAGE_DBDATA:
       return action.payload;

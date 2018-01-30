@@ -13,9 +13,9 @@ const rootReducer = combineReducers({
   lightValue: LightValueReducer,
   idleValue: IdleValueReducer,
   speedValue: SpeedReducer,
-  profileDbvalue: ProfileDbReducer,
-  lightDbvalue: LightDbReducer,
-  voltageDbvalue: VoltageDbReducer,
+  profileDbValue: ProfileDbReducer,
+  lightDbValue: LightDbReducer,
+  voltageDbValue: VoltageDbReducer,
 });
 
 export default rootReducer;
