@@ -192,8 +192,46 @@
   margin: 50px;
 }
 
+.dataLines {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 60px !important;
+}
+
 .dataButton {
     margin: 20px;
     border-radius: 5px;
-    border: none;
+    font-weight: bold;
+    font-size: 14px !important;
+    background-color: #f44242;
+    height:30px;
+    border: solid black 1px;
+}
+
+.addButton {
+    margin: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px !important;
+    background-color: #4165f4;
+    height:30px;
+    border: solid black 1px;
+    width: 70px;
+}
+
+li {
+    list-style: none;
+}
+
+.center {
+    text-align: center
+}
+ul {
+    padding: 0;
+}
+
+.profileForm input {
+    height: 30px;
+    border: solid black 1px;
+    margin: 5px;
 }

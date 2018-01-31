@@ -1,6 +1,7 @@
 import { PROFILE_DBDATA, LIGHT_DBDATA, VOLTAGE_DBDATA } from '../constants';
 
 export const profileFromDb = profileDbValue => {
+  console.log("action_dbvalues", profileDbValue);
   return {
     type: PROFILE_DBDATA,
     payload: profileDbValue,

@@ -18,19 +18,21 @@ const URL_PREFIX = 'http://localhost:3001/';
 
 class Data extends Component {
   async componentDidMount() {
-    const apiRequestProfiles = fetch(`${URL_PREFIX}profiles`);
-    const apiRequestLight = fetch(`${URL_PREFIX}light`);
-    const apiRequestVoltage = fetch(`${URL_PREFIX}voltage`);
-    const [profiles, light, voltage] = await Promise.all([
-      apiRequestProfiles,
-      apiRequestLight,
-      apiRequestVoltage,
-    ]);
-    const json = await profiles.json();
-    console.log(json);
-    this.props.profileFromDb(json);
-    this.props.lightFromDb(await light.json());
-    this.props.voltageFromDb(await voltage.json());
+    await this.pullFromDb();
+  }
+
+  async pullFromDb () {
+      const apiRequestProfiles = fetch(`${URL_PREFIX}profiles`);
+      const apiRequestLight = fetch(`${URL_PREFIX}light`);
+      const apiRequestVoltage = fetch(`${URL_PREFIX}voltage`);
+      const [profiles, light, voltage] = await Promise.all([
+          apiRequestProfiles,
+          apiRequestLight,
+          apiRequestVoltage,
+      ]);
+      this.props.profileFromDb(await profiles.json());
+      this.props.lightFromDb(await light.json());
+      this.props.voltageFromDb(await voltage.json());
   }
 
   async removeProfile(id) {
@@ -45,7 +47,6 @@ class Data extends Component {
       let response = await fetch(request);
       profiles.splice(profiles.indexOf(profile), 1);
       this.props.profileFromDb(profile);
-      // console.log("Remove Profile", response.json());
       return response.json();
     } catch (err) {
       console.log(err);
@@ -53,40 +54,39 @@ class Data extends Component {
   }
 
   async clearAllProfiles() {
-      let profiles = this.props.profileDbValue;
+    let profiles = this.props.profileDbValue;
 
-      let request = new Request(`${URL_PREFIX}/profiles`, {
-          method: 'DELETE',
-      });
-      try {
-          let response = await fetch(request);
-          profiles = [];
-          this.props.profileFromDb(profiles);
-          return response.json();
-      } catch (err) {
-          console.log(err);
-      }
+    let request = new Request(`${URL_PREFIX}/profiles`, {
+      method: 'DELETE',
+    });
+    try {
+      let response = await fetch(request);
+      profiles = [];
+      this.props.profileFromDb(profiles);
+      return response.json();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   async addProfile(event) {
     event.preventDefault();
     let profile_data = {
-      name: this.props.profileFromDb(this.nameInput.value),
-      environment: this.props.profileFromDb(this.environmentInput.value),
-      id: Math.random().toFixed(3),
+      name: this.nameInput.value,
+      environment: this.environmentInput.value,
+      // id: Math.random().toFixed(0),
     };
-    let request = new Request(`${URL_PREFIX}profiles`, {
+      console.log("profile_data", profile_data);
+
+    let options = {
       method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(profile_data),
-    });
-    let profiles = this.props.profileDbValue;
-    profiles.push(profile_data);
-    this.props.profileFromDb(profiles);
+    };
 
     try {
-      let response = await fetch(request);
-      return response.json();
+        await fetch(`${URL_PREFIX}profiles`,options);
+        await this.pullFromDb();
     } catch (err) {
       console.log(err);
     }
@@ -113,7 +113,7 @@ class Data extends Component {
               <h1 className="data profileData">
                 <b>Profiles</b>
               </h1>
-              <form ref="profileForm">
+              <form ref="profileForm" className="profileForm">
                 <input
                   type="text"
                   ref={ref => (this.nameInput = ref)}
@@ -122,24 +122,34 @@ class Data extends Component {
                 <input
                   type="text"
                   ref={ref => (this.environmentInput = ref)}
-                  placeholder="Environments"
+                  placeholder="Environment"
                 />
-                <button className="dataButton" onClick={this.addProfile.bind(this)}>
-                  Add Profile
+                <button
+                  className="addButton"
+                  onClick={this.addProfile.bind(this)}
+                >
+                  ADD
                 </button>
               </form>
-              <ul>
+              <ul className="center">
                 {profileDbValue.map(profiles => (
-                  <ul className="dataRows" key={profiles.id}>
-                    {profiles.name} {profiles.environment}{' '}
-                    <button className="dataButton"
+                  <li className="dataRows dataLines" key={profiles.id}>
+                    NAME: {profiles.name} <br/>
+                      ENVIRONMENT: {profiles.environment}
+                    <button
+                      className="dataButton"
                       onClick={this.removeProfile.bind(this, profiles.id)}
                     >
-                      Remove Profile
+                      DELETE
                     </button>{' '}
-                  </ul>
+                  </li>
                 ))}
-                  <button className="dataButton" onClick={this.clearAllProfiles.bind(this)}>Clear All</button>
+                <button
+                  className="dataButton"
+                  onClick={this.clearAllProfiles.bind(this)}
+                >
+                  CLEAR ALL
+                </button>
               </ul>
             </Col>
             <Col md={4}>
@@ -148,9 +158,10 @@ class Data extends Component {
               </h1>
               <ul>
                 {lightDbValue.map(light => (
-                  <ul key={light.id}>
-                    {light.level} {light.amount}{' '}
-                  </ul>
+                  <li className="dataLines" key={light.id}>
+                    LEVEL: {light.level} <br/>
+                      AMOUNT: {light.amount}{' '}
+                  </li>
                 ))}
               </ul>
             </Col>
@@ -160,9 +171,10 @@ class Data extends Component {
               </h1>
               <ul>
                 {voltageDbValue.map(voltage => (
-                  <ul key={voltage.id}>
-                    {voltage.level} {voltage.amount}{' '}
-                  </ul>
+                  <li className="dataLines" key={voltage.id}>
+                    LEVEL: {voltage.level} <br/>
+                    AMOUNT: {voltage.amount}{' '}
+                  </li>
                 ))}
               </ul>
             </Col>
@@ -173,10 +185,8 @@ class Data extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { profileDbValue, lightDbValue, voltageDbValue } = state;
-  console.log({ state });
-
+function mapStateToProps({profileDbValue, lightDbValue, voltageDbValue}) {
+console.log("profileDbValue", profileDbValue);
   return { profileDbValue, lightDbValue, voltageDbValue };
 }
 
