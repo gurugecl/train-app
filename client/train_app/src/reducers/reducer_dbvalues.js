@@ -19,7 +19,7 @@ export const ProfileDbReducer = (state = initialProfileData, action) => {
 export const LightDbReducer = (state = initialLightData, action) => {
   switch (action.type) {
     case LIGHT_DBDATA:
-      console.log('Light Payload', action.payload);
+      // console.log('Light Payload', action.payload);
       return action.payload;
     default:
       return state;
