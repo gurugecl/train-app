@@ -8,3 +8,4 @@ export const SPEED_SELECTED = 'SPEED_SELECTED';
 export const PROFILE_DBDATA = 'PROFILE_DBDATA';
 export const LIGHT_DBDATA = 'LIGHT_DBDATA';
 export const VOLTAGE_DBDATA = 'VOLTAGE_DBDATA';
+export const POWER_VALUE = 'POWER_VALUE';

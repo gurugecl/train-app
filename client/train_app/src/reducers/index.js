@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { LightValueReducer, LightStatusReducer } from './reducer_light';
 import { SpeedReducer } from './reducer_speed';
 import { IdleValueReducer } from './reducer_idle';
+import { PowerValueReducer } from './reducer_power';
 import {
   VoltageDbReducer,
   LightDbReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   profileDbValue: ProfileDbReducer,
   lightDbValue: LightDbReducer,
   voltageDbValue: VoltageDbReducer,
+  powerValue: PowerValueReducer,
 });
 
 export default rootReducer;

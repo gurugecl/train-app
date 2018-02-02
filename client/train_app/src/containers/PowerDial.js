@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectLightStatus } from '../actions/action_light';
+import { selectPowerValue } from '../actions/action_power';
 import '../components/Home.css';
 import power from '../images/power.gif';
 
 class PowerDial extends Component {
+  mqttPower = e => {
+    // (e.target.value); //gets sent to mqtt to update train.
+    console.log('Changing Train Power to', e.target.value);
+    this.props.selectPowerValue(this.props.powerValue); // Once mqtt updates value is sent back to client to update store state
+  };
+
   render() {
-    // console.log(this.props.asdf);
     return (
-      <div className="powerDial section">
+      <div className="powerDial section" onSubmit={this.mqttPower}>
         <img src={power} className="powerImage" alt="power" />
         <h1>Power</h1>
+        /*{this.props.powerValue} //power value*/
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//         asdf: '123'
-//     }
-// }
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectLightStatus }, dispatch);
+function mapStateToProps(powerValue) {
+  return {
+    powerValue,
+  };
 }
 
-export default connect(null, mapDispatchToProps)(PowerDial);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectPowerValue }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PowerDial);
