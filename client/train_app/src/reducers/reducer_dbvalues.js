@@ -34,3 +34,24 @@ export const VoltageDbReducer = (state = initialVoltageData, action) => {
       return state;
   }
 };
+
+// addReducer('dbValues', (state, payload) => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             // Data in payload would typically be used
+//             // in the following call to an asynchronous function.
+//             const result = await fetch('some-url');
+//
+//             // Build the new state using the current state
+//             // obtained by calling getState() rather than
+//             // the state passed to the reducer function
+//             // because it may have changed
+//             // since the asynchronous activity began.
+//             const newState = {...getState(), someKey: result};
+//
+//             resolve(newState);
+//         } catch (e) {
+//             reject(e);
+//         }
+//     });
+// });

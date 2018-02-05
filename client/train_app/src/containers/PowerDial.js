@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectPowerValue } from '../actions/action_power';
+import { selectPowerValue } from '../actions/action_powerDial';
 import '../components/Home.css';
 import power from '../images/power.gif';
 
@@ -17,7 +17,7 @@ class PowerDial extends Component {
       <div className="powerDial section" onSubmit={this.mqttPower}>
         <img src={power} className="powerImage" alt="power" />
         <h1>Power</h1>
-        /*{this.props.powerValue} //power value*/
+        /*{this.props.powerValue} //power value displayed using an animated svg*/
       </div>
     );
   }
