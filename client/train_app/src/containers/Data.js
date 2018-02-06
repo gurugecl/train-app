@@ -5,23 +5,19 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import {
-  profileFromDb,
-  lightFromDb,
-  voltageFromDb,
-} from '../actions/action_dbvalues';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import '../components/Home.css';
+import { dispatch } from 'redux-easy';
 
 const URL_PREFIX = 'http://localhost:3001/';
 
 class Data extends Component {
+
   async componentDidMount() {
     await this.pullFromDb();
   }
 
-  async pullFromDb() {
+  pullFromDb = async () => {
     const apiRequestProfiles = fetch(`${URL_PREFIX}profiles`);
     const apiRequestLight = fetch(`${URL_PREFIX}light`);
     const apiRequestVoltage = fetch(`${URL_PREFIX}voltage`);
@@ -30,12 +26,12 @@ class Data extends Component {
       apiRequestLight,
       apiRequestVoltage,
     ]);
-    this.props.profileFromDb(await profiles.json());
-    this.props.lightFromDb(await light.json());
-    this.props.voltageFromDb(await voltage.json());
-  }
+      dispatch('setDBProfile', await profiles.json());
+      dispatch('setDBLight', await light.json());
+      dispatch('setDBVoltage', await voltage.json());
+  };
 
-  async deleteProfile(id) {
+  deleteProfile = async (id) => {
     let options = {
       method: 'DELETE',
     };
@@ -45,9 +41,9 @@ class Data extends Component {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  async deleteAllProfiles() {
+  deleteAllProfiles = async() => {
     let options = {
       method: 'DELETE',
     };
@@ -57,9 +53,9 @@ class Data extends Component {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  async addProfile(event) {
+  addProfile = async(event) => {
     event.preventDefault();
 
     let profile_data = {
@@ -81,16 +77,11 @@ class Data extends Component {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   render() {
-
     const { profileDbValue, lightDbValue, voltageDbValue } = this.props;
-      console.log("render called", profileDbValue);
 
-    // if (!profileDbValue || !voltageDbValue || !lightDbValue) {
-    //   return null;
-    // }
     return (
       <div className="Build">
         <Grid>
@@ -119,7 +110,7 @@ class Data extends Component {
                 />
                 <button
                   className="addButton"
-                  onClick={this.addProfile.bind(this)}
+                  onClick={this.addProfile}
                 >
                   ADD
                 </button>
@@ -131,7 +122,7 @@ class Data extends Component {
                     ENVIRONMENT: {profiles.environment}
                     <button
                       className="dataButton"
-                      onClick={this.deleteProfile.bind(this, profiles.id)}
+                      onClick={() => this.deleteProfile(profiles.id)}
                     >
                       DELETE
                     </button>{' '}
@@ -139,7 +130,7 @@ class Data extends Component {
                 ))}
                 <button
                   className="dataButton"
-                  onClick={this.deleteAllProfiles.bind(this)}
+                  onClick={this.deleteAllProfiles}
                 >
                   CLEAR ALL
                 </button>
@@ -178,16 +169,11 @@ class Data extends Component {
   }
 }
 
-function mapStateToProps({ profileDbValue, lightDbValue, voltageDbValue }) {
-  console.log('profileDbValue', profileDbValue);
-  return { profileDbValue, lightDbValue, voltageDbValue };
-}
+const mapState = state => {
+    const { profileDbValue, lightDbValue, voltageDbValue } = state;
+    return { profileDbValue, lightDbValue, voltageDbValue };
+};
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    { profileFromDb, lightFromDb, voltageFromDb },
-    dispatch,
-  );
-}
+export default connect(mapState)(Data);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Data);
+

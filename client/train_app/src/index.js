@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// import { createStore, applyMiddleware, compose } from 'redux';
-// import thunk from 'redux-thunk';
-// import registerServiceWorker from './registerServiceWorker';
-// import Async from './middlewares/async';
-// import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { reduxSetup } from 'redux-easy';
 import './index.css';
@@ -17,7 +12,11 @@ import Sounds from './components/Sounds';
 import Data from './containers/Data';
 
 const initialState = {
-  user: { firstName: '' },
+  light: { lightLevel: 0 },
+  power: { powerLevel: 0 },
+  profileDB: [],
+  lightDB: [],
+  voltageDB: [],
 };
 
 const store = reduxSetup({ initialState, render });
@@ -42,24 +41,3 @@ function render() {
 }
 
 render();
-
-//Using regular Redux
-// const createStoreWithMiddleware = applyMiddleware(Async, thunk)(createStore);
-//
-// ReactDOM.render(
-//   <Provider store={createStoreWithMiddleware(rootReducer)}>
-//     <BrowserRouter basename="/">
-//       <div>
-//         <Header />
-//         <Switch>
-//           <Route path="/pictures" component={Pics} />
-//           <Route path="/sounds" component={Sounds} />
-//           <Route path="/data" component={Data} />
-//           <Route exact path="/" component={Home} />
-//         </Switch>
-//       </div>
-//     </BrowserRouter>
-//   </Provider>,
-//   document.getElementById('root'),
-// );
-// registerServiceWorker();
